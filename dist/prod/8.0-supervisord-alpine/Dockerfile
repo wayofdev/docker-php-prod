@@ -20,6 +20,7 @@ RUN set -eux; \
     apk -U upgrade -a \
     # Add production dependencies
     && apk add --update --no-cache supervisor \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
     # Temporary build dependencies for compiling Pecl extensions
     && apk add --update --no-cache --virtual .temp-build-deps \
         $PHPIZE_DEPS \

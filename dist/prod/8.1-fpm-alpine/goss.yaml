@@ -60,3 +60,7 @@ command:
       - soap
       - yaml
     exit-status: 0
+  "composer -v":
+    stdout:
+      - "Composer version"
+    exit-status: 0

@@ -26,6 +26,9 @@ RUN set -eux; \
 {% if 'supervisord' == php_type %}
     && apk add --update --no-cache supervisor \
 {% endif %}
+{% if true == install_composer %}
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+{% endif %}
     # Temporary build dependencies for compiling Pecl extensions
     && apk add --update --no-cache --virtual .temp-build-deps \
         $PHPIZE_DEPS \
