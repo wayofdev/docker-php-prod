@@ -1,0 +1,62 @@
+# Manual
+# https://github.com/aelsabbahy/goss/blob/master/docs/manual.md
+# https://www.calhoun.io/intro-to-templates-p3-functions/
+file:
+  /usr/local/etc/php-fpm.conf:
+    filetype: file
+    exists: true
+  /usr/local/etc/php-fpm.d/docker.conf:
+    filetype: file
+    exists: true
+    contains:
+      - "Custom Config File"
+      - "log_limit = 8192"
+  /usr/local/etc/php-fpm.d/zz-docker.conf:
+    filetype: file
+    exists: true
+    contains:
+      - "Custom Config File"
+      - "daemonize = no"
+  /usr/local/etc/php-fpm.d/www.conf:
+    filetype: file
+    exists: true
+    contains:
+      - "Custom Config File"
+      - "pm.max_children = 5"
+port:
+  tcp6:9000:
+    listening: true
+    ip:
+      - '::'
+process:
+  php-fpm:
+    running: true
+group:
+  www-data:
+    exists: true
+user:
+  www-data:
+    exists: true
+    groups:
+      - www-data
+package:
+  curl:
+    installed: true
+command:
+  "php -v":
+    stdout:
+      - "PHP 8.1"
+    stderr:
+      - "!/Unable to load dynamic library/"
+    exit-status: 0
+  "php -m":
+    stdout:
+      - amqp
+      - exif
+      - gd
+      - imagick
+      - protobuf
+      - rdkafka
+      - soap
+      - yaml
+    exit-status: 0
