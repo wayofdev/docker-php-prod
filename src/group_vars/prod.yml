@@ -74,5 +74,3 @@ ext_pecl_versions:
   amqp: "1.11.0"
   protobuf: "3.19.1"
   yaml: "2.2.2"
-
-install_composer: true

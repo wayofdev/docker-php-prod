@@ -1,5 +1,5 @@
 IMAGE_NAMESPACE ?= wayofdev/php-prod
-TEMPLATE ?= 7.4-supervisord-alpine
+TEMPLATE ?= 7.4-cli-alpine
 
 
 

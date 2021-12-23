@@ -19,13 +19,12 @@ LABEL "org.opencontainers.image.description"="PHP-SUPERVISORD 8.1-prod"
 RUN set -eux; \
     apk -U upgrade -a \
     # Add production dependencies
-    && apk add --update --no-cache supervisor \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+    && apk add --no-cache supervisor \
     # Temporary build dependencies for compiling Pecl extensions
-    && apk add --update --no-cache --virtual .temp-build-deps \
+    && apk add --no-cache --virtual .temp-build-deps \
         $PHPIZE_DEPS \
     # Soap Messaging Protocol
-    && apk add --update --no-cache libxml2-dev \
+    && apk add --no-cache libxml2-dev \
     && docker-php-ext-install -j$(nproc) soap \
     && apk del libxml2-dev \
     ### Image Processing
@@ -33,7 +32,7 @@ RUN set -eux; \
     # Exif - (Exchangeable image information) / Image Meta Data
     && docker-php-ext-install -j$(nproc) exif \
     # GD
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         freetype libjpeg-turbo libpng libxpm libwebp \
         freetype-dev libjpeg-turbo-dev libpng-dev libxpm-dev libwebp-dev \
     && docker-php-ext-configure gd --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype \
@@ -42,21 +41,21 @@ RUN set -eux; \
     ####################################################################################################################
     # Pecl Dependencies
     # Imagick
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         imagemagick libgomp \
         imagemagick-dev \
     && pecl install imagick-3.6.0 \
     && docker-php-ext-enable imagick \
     && apk del imagemagick-dev \
     # Client for Apache Kafka
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         librdkafka \
         librdkafka-dev \
     && pecl install rdkafka-6.0.0RC2 \
     && docker-php-ext-enable rdkafka \
     && apk del librdkafka-dev \
     # AMQP - Communicate with any amqp compliant server
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         rabbitmq-c \
         rabbitmq-c-dev \
     && pecl install amqp-1.11.0 \
@@ -67,7 +66,7 @@ RUN set -eux; \
     && pecl install protobuf-3.19.1 \
     && docker-php-ext-enable --ini-name docker-php-ext-10-protobuf.ini protobuf \
     # Yaml parser and emitter
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         yaml \
         yaml-dev \
     && pecl install yaml-2.2.2 \

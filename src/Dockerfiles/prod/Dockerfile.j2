@@ -1,6 +1,6 @@
 {{ edit_comment_prod }}
 
-{% if php_type == "supervisord" %}
+{% if "supervisord" == php_type %}
 FROM wayofdev/php-base:{{ php_version }}-cli-{{ os_version }}-latest
 {% else %}
 FROM wayofdev/php-base:{{ php_version }}-{{ php_type }}-{{ os_version }}-latest
@@ -24,17 +24,14 @@ RUN set -eux; \
     apk -U upgrade -a \
     # Add production dependencies
 {% if 'supervisord' == php_type %}
-    && apk add --update --no-cache supervisor \
-{% endif %}
-{% if true == install_composer %}
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+    && apk add --no-cache supervisor \
 {% endif %}
     # Temporary build dependencies for compiling Pecl extensions
-    && apk add --update --no-cache --virtual .temp-build-deps \
+    && apk add --no-cache --virtual .temp-build-deps \
         $PHPIZE_DEPS \
     # Soap Messaging Protocol
 {% if 'soap' in ext_native_enabled %}
-    && apk add --update --no-cache libxml2-dev \
+    && apk add --no-cache libxml2-dev \
     && docker-php-ext-install -j$(nproc) soap \
     && apk del libxml2-dev \
 {% endif %}
@@ -46,7 +43,7 @@ RUN set -eux; \
 {% endif %}
     # GD
 {% if 'gd' in ext_native_enabled %}
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         freetype libjpeg-turbo libpng libxpm libwebp \
         freetype-dev libjpeg-turbo-dev libpng-dev libxpm-dev libwebp-dev \
     && docker-php-ext-configure gd --enable-gd --with-webp --with-jpeg --with-xpm --with-freetype \
@@ -57,7 +54,7 @@ RUN set -eux; \
     # Pecl Dependencies
     # Imagick
 {% if 'imagick' in ext_pecl_enabled %}
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         imagemagick libgomp \
         imagemagick-dev \
     && pecl install imagick-{{ ext_pecl_versions.imagick }} \
@@ -66,7 +63,7 @@ RUN set -eux; \
 {% endif %}
     # Client for Apache Kafka
 {% if 'rdkafka' in ext_pecl_enabled %}
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         librdkafka \
         librdkafka-dev \
     && pecl install rdkafka-{{ ext_pecl_versions.rdkafka }} \
@@ -75,7 +72,7 @@ RUN set -eux; \
 {% endif %}
     # AMQP - Communicate with any amqp compliant server
 {% if 'amqp' in ext_pecl_enabled %}
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         rabbitmq-c \
         rabbitmq-c-dev \
     && pecl install amqp-{{ ext_pecl_versions.amqp }} \
@@ -90,7 +87,7 @@ RUN set -eux; \
 {% endif %}
     # Yaml parser and emitter
 {% if 'yaml' in ext_pecl_enabled %}
-    && apk add --update --no-cache \
+    && apk add --no-cache \
         yaml \
         yaml-dev \
     && pecl install yaml-{{ ext_pecl_versions.yaml }} \
@@ -102,10 +99,10 @@ RUN set -eux; \
     && mkdir /app \
     && chown www-data:www-data /app
 
-{% if php_type == 'fpm' %}
+{% if 'fpm' == php_type %}
 COPY ./configs/php-fpm.d/ /usr/local/etc/php-fpm.d/
 {% endif %}
-{% if php_type == 'supervisord' %}
+{% if 'supervisord' == php_type %}
 COPY --chown=www-data ./configs/supervisord.conf /etc/supervisord.conf
 {% endif %}
 
@@ -113,6 +110,6 @@ WORKDIR /app
 
 USER www-data
 
-{% if php_type == 'supervisord' %}
+{% if 'supervisord' == php_type %}
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 {% endif %}

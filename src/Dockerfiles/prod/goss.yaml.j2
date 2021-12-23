@@ -2,7 +2,7 @@
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md
 # https://www.calhoun.io/intro-to-templates-p3-functions/
 file:
-{% if php_type == "fpm" %}
+{% if 'fpm' == php_type %}
   /usr/local/etc/php-fpm.conf:
     filetype: file
     exists: true
@@ -33,7 +33,7 @@ process:
   php-fpm:
     running: true
 {% endif %}
-{% if php_type == "supervisord" %}
+{% if 'supervisord' == php_type %}
   /etc/supervisord.conf:
     filetype: file
     exists: true
@@ -69,9 +69,3 @@ command:
       - {{ ext }}
 {% endfor %}
     exit-status: 0
-{% if install_composer == true %}
-  "composer -v":
-    stdout:
-      - "Composer version"
-    exit-status: 0
-{% endif %}
