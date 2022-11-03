@@ -21,6 +21,8 @@ LABEL "org.opencontainers.image.title"="PHP-{{ php_type|upper }} {{ php_version 
 LABEL "org.opencontainers.image.description"="PHP-{{ php_type|upper }} {{ php_version }}-{{ level }}"
 
 RUN set -eux; \
+    rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/* \
     apk -U upgrade -a \
     # Add production dependencies
 {% if 'supervisord' == php_type %}

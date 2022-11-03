@@ -17,6 +17,8 @@ LABEL "org.opencontainers.image.title"="PHP-SUPERVISORD 7.4-prod"
 LABEL "org.opencontainers.image.description"="PHP-SUPERVISORD 7.4-prod"
 
 RUN set -eux; \
+#    rm -rf /var/cache/apk/* \
+#    && rm -rf /tmp/* \
     apk -U upgrade -a \
     # Add production dependencies
     && apk add --no-cache supervisor \

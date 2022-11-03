@@ -17,6 +17,8 @@ LABEL "org.opencontainers.image.title"="PHP-FPM 8.1-prod"
 LABEL "org.opencontainers.image.description"="PHP-FPM 8.1-prod"
 
 RUN set -eux; \
+#    rm -rf /var/cache/apk/* \
+#    && rm -rf /tmp/* \
     apk -U upgrade -a \
     # Add production dependencies
     # Temporary build dependencies for compiling Pecl extensions
