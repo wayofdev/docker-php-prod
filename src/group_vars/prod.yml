@@ -47,6 +47,8 @@ tpl_supervisord_configs:
 tpl_docker_tests:
   - src: Dockerfiles/prod/goss.yaml.j2
     dst: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_name }}/goss.yaml"
+  - src: Dockerfiles/prod/goss_wait.yaml
+    dst: "../dist/prod/{{ php_version }}-supervisord-{{ os_name }}/goss_wait.yaml"
 
 
 # Enabled extensions

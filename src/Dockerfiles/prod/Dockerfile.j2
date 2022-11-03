@@ -23,7 +23,7 @@ LABEL "org.opencontainers.image.description"="PHP-{{ php_type|upper }} {{ php_ve
 RUN set -eux; \
     rm -rf /var/cache/apk/* \
     && rm -rf /tmp/* \
-    apk -U upgrade -a \
+    && apk -U upgrade -a \
     # Add production dependencies
 {% if 'supervisord' == php_type %}
     && apk add --no-cache supervisor \

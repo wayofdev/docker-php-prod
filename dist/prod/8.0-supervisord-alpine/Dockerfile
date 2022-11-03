@@ -17,9 +17,9 @@ LABEL "org.opencontainers.image.title"="PHP-SUPERVISORD 8.0-prod"
 LABEL "org.opencontainers.image.description"="PHP-SUPERVISORD 8.0-prod"
 
 RUN set -eux; \
-#    rm -rf /var/cache/apk/* \
-#    && rm -rf /tmp/* \
-    apk -U upgrade -a \
+    rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/* \
+    && apk -U upgrade -a \
     # Add production dependencies
     && apk add --no-cache supervisor \
     # Temporary build dependencies for compiling Pecl extensions
