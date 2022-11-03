@@ -1,9 +1,9 @@
 {{ edit_comment_prod }}
 
-{% if "supervisord" == php_type %}
-FROM wayofdev/php-base:{{ php_version }}-cli-{{ os_version }}-latest
+{% if 'supervisord' == php_type %}
+FROM wayofdev/php-base:{{ php_version }}-cli-{{ os_name }}-latest
 {% else %}
-FROM wayofdev/php-base:{{ php_version }}-{{ php_type }}-{{ os_version }}-latest
+FROM wayofdev/php-base:{{ php_version }}-{{ php_type }}-{{ os_name }}-latest
 {% endif %}
 
 # Labels

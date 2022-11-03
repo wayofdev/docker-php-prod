@@ -5,25 +5,22 @@
 edit_comment_prod: "# Auto-generated via Ansible: edit src/Dockerfiles/prod/Dockerfile.j2 instead."
 
 
-
 # Prod dist directories
 ########################################################################################################################
 tpl_directories:
   # For "prod" create all variants: cli, fpm, supervisord
-  - path: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_version }}/configs/"
+  - path: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_name }}/configs/"
 
 tpl_fpm_config_directories:
   # Additionally, for "prod", create "php-fpm.d" directory
-  - path: "../dist/prod/{{ php_version }}-fpm-{{ os_version }}/configs/php-fpm.d/"
-
+  - path: "../dist/prod/{{ php_version }}-fpm-{{ os_name }}/configs/php-fpm.d/"
 
 
 # Dockerfile paths for cli, fpm and supervisord Dockerfiles
 ########################################################################################################################
 tpl_dockerfiles:
   - src: Dockerfiles/prod/Dockerfile.j2
-    dst: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_version }}/Dockerfile"
-
+    dst: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_name }}/Dockerfile"
 
 
 # PHP config paths
@@ -31,27 +28,25 @@ tpl_dockerfiles:
 tpl_fpm_configs:
   # php-fpm.d/docker.conf
   - src: config/php-fpm.d/docker.conf
-    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_version }}/configs/php-fpm.d/docker.conf"
+    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_name }}/configs/php-fpm.d/docker.conf"
   # php-fpm.d/www.conf
   - src: config/php-fpm.d/www.conf
-    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_version }}/configs/php-fpm.d/www.conf"
+    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_name }}/configs/php-fpm.d/www.conf"
   # php-fpm.d/zz-docker.conf
   - src: config/php-fpm.d/zz-docker.conf
-    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_version }}/configs/php-fpm.d/zz-docker.conf"
+    dst: "../dist/prod/{{ php_version }}-fpm-{{ os_name }}/configs/php-fpm.d/zz-docker.conf"
 
 tpl_supervisord_configs:
   # supervisord.conf
   - src: config/supervisord.conf
-    dst: "../dist/prod/{{ php_version }}-supervisord-{{ os_version }}/configs/supervisord.conf"
-
+    dst: "../dist/prod/{{ php_version }}-supervisord-{{ os_name }}/configs/supervisord.conf"
 
 
 # Dgoss tests
 ########################################################################################################################
 tpl_docker_tests:
   - src: Dockerfiles/prod/goss.yaml.j2
-    dst: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_version }}/goss.yaml"
-
+    dst: "../dist/prod/{{ php_version }}-{{ php_type }}-{{ os_name }}/goss.yaml"
 
 
 # Enabled extensions
@@ -69,8 +64,10 @@ ext_pecl_enabled:
   - yaml
 
 ext_pecl_versions:
-  imagick: "3.6.0"
-  rdkafka: "6.0.0RC2"
+  imagick: "3.7.0"
+  rdkafka: "6.0.3"
   amqp: "1.11.0"
-  protobuf: "3.19.1"
+  protobuf: "3.21.9"
   yaml: "2.2.2"
+
+...

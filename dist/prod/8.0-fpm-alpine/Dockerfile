@@ -7,9 +7,9 @@ FROM wayofdev/php-base:8.0-fpm-alpine-latest
 LABEL "maintainer"="lotyp <lotyp7@gmail.com>"
 LABEL "vendor"="wayofdev"
 LABEL "org.opencontainers.image.authors"="lotyp <lotyp7@gmail.com>"
-LABEL "org.opencontainers.image.url"="https://github.com/wayofdev/docker-php"
-LABEL "org.opencontainers.image.documentation"="https://github.com/wayofdev/docker-php"
-LABEL "org.opencontainers.image.source"="https://github.com/wayofdev/docker-php"
+LABEL "org.opencontainers.image.url"="https://hub.docker.com/r/wayofdev/php-prod"
+LABEL "org.opencontainers.image.documentation"="https://github.com/wayofdev/docker-php-prod"
+LABEL "org.opencontainers.image.source"="https://github.com/wayofdev/docker-php-prod"
 LABEL "org.opencontainers.image.vendor"="wayofdev"
 LABEL "org.opencontainers.image.licenses"="MIT"
 LABEL "org.opencontainers.image.ref.name"="8.0-prod"
@@ -43,14 +43,14 @@ RUN set -eux; \
     && apk add --no-cache \
         imagemagick libgomp \
         imagemagick-dev \
-    && pecl install imagick-3.6.0 \
+    && pecl install imagick-3.7.0 \
     && docker-php-ext-enable imagick \
     && apk del imagemagick-dev \
     # Client for Apache Kafka
     && apk add --no-cache \
         librdkafka \
         librdkafka-dev \
-    && pecl install rdkafka-6.0.0RC2 \
+    && pecl install rdkafka-6.0.3 \
     && docker-php-ext-enable rdkafka \
     && apk del librdkafka-dev \
     # AMQP - Communicate with any amqp compliant server
@@ -62,7 +62,7 @@ RUN set -eux; \
     && apk del rabbitmq-c-dev \
     # Protobuf - Google's extensible mechanism for serializing structured data.
     # https://spiral.dev/docs/grpc-configuration#toolkit-installation-install-protobuf-extension-optional
-    && pecl install protobuf-3.19.1 \
+    && pecl install protobuf-3.21.9 \
     && docker-php-ext-enable --ini-name docker-php-ext-10-protobuf.ini protobuf \
     # Yaml parser and emitter
     && apk add --no-cache \

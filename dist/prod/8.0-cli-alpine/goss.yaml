@@ -1,3 +1,5 @@
+---
+
 # Manual
 # https://github.com/aelsabbahy/goss/blob/master/docs/manual.md
 # https://www.calhoun.io/intro-to-templates-p3-functions/
@@ -31,3 +33,5 @@ command:
       - soap
       - yaml
     exit-status: 0
+
+...
