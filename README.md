@@ -21,6 +21,14 @@
 
 # Docker Image: PHP
 
+> [!WARNING]  
+> Package development **deprecated**
+> Use:
+>   - https://github.com/wayofdev/docker-php-base
+>   - https://github.com/wayofdev/docker-php-dev
+
+<br>
+
 Repository contains dist folder with generated production ready PHP images and source code, written on Ansible, to generate them. Is used together with other WOD images, to create local development environment for our projects.
 
 **Upstream image:** [wayofdev/docker-php-base](https://github.com/wayofdev/docker-php-base)
@@ -186,11 +194,6 @@ This repository was created in **2022** by [lotyp / wayofdev](https://github.com
 
 ## 🫡 Contributors
 
-<img align="left" src="https://img.shields.io/github/contributors-anon/wayofdev/docker-php-prod?style=for-the-badge"/>
-
-<a href="https://github.com/wayofdev/docker-nginx/graphs/contributors">
-  <img src="https://opencollective.com/wod/contributors.svg?width=890&button=false">
-</a>
+<img align="left" src="https://img.shields.io/github/contributors-anon/wayofdev/docker-php-prod?style=for-the-badge" alt="Contributors"/>
 
 <br>
-
