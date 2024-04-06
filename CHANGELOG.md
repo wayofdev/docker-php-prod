@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/wayofdev/docker-php-prod/compare/v2.0.0...v2.0.1) (2024-04-06)
+
+
+### Documentation
+
+* deprecate repository ([d793d93](https://github.com/wayofdev/docker-php-prod/commit/d793d9381799686016782a879c6fd7d6fe90ce20))
+
 ## [2.0.0](https://github.com/wayofdev/docker-php-prod/compare/v1.1.2...v2.0.0) (2022-11-03)
 
 
